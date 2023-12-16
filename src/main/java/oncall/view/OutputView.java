@@ -23,7 +23,7 @@ public class OutputView {
     private void printDateWorker(int month, DateWorker dateWorker) {
         int date = dateWorker.getWorkDate().getDate();
         String dayOfTheWeek = dateWorker.getWorkDate().getDayOfTheWeek().getKoreanName();
-        if (dateWorker.getWorkDate().isLegalHoliday() && dateWorker.getWorkDate().isWeekday()) {
+        if (dateWorker.getWorkDate().isLegalHoliday() && dateWorker.getWorkDate().isOriginWeekday()) {
             dayOfTheWeek = dayOfTheWeek + "(휴일)";
         }
         String worker = dateWorker.getWorker().getWorkerName();

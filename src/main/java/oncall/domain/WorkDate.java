@@ -2,16 +2,18 @@ package oncall.domain;
 
 import java.util.Objects;
 
-public class WorkDate implements Comparable<WorkDate>{
+public class WorkDate implements Comparable<WorkDate> {
     private final int date;
     private final DayOfTheWeek dayOfTheWeek;
     private DayType dayType;
+    private final DayType originDayType;
     private boolean isLegalHoliday;
 
     public WorkDate(int date, DayOfTheWeek dayOfTheWeek, DayType dayType, boolean isLegalHoliday) {
         this.date = date;
         this.dayOfTheWeek = dayOfTheWeek;
         this.dayType = dayType;
+        this.originDayType = dayType;
         this.isLegalHoliday = isLegalHoliday;
     }
 
@@ -32,6 +34,10 @@ public class WorkDate implements Comparable<WorkDate>{
         return dayType == DayType.WEEKDAY;
     }
 
+    public boolean isOriginWeekday() {
+        return originDayType == DayType.WEEKDAY;
+    }
+
     public int getDate() {
         return date;
     }
@@ -42,6 +48,10 @@ public class WorkDate implements Comparable<WorkDate>{
 
     public boolean isLegalHoliday() {
         return isLegalHoliday;
+    }
+
+    public DayType getOriginDayType() {
+        return originDayType;
     }
 
     @Override

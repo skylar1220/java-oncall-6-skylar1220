@@ -52,6 +52,13 @@ public class EmergencyScheduler {
                     weekendsWorkers.add(new DateWorker(workDate, worker));
                     weekendWorkersIndex++;
                 }
+
+            }
+            if (weekdayWorkersIndex >= rawWeekdaysWorkers.size()) {
+                weekdayWorkersIndex = weekdayWorkersIndex - rawWeekdaysWorkers.size();
+            }
+            if (weekendWorkersIndex >= rawWeekendsWorkers.size()) {
+                weekendWorkersIndex = weekendWorkersIndex - rawWeekendsWorkers.size();
             }
             totalWorkers = sortDateWorkers(weekdaysWorkers, weekendsWorkers);
         }
@@ -74,7 +81,8 @@ public class EmergencyScheduler {
         return false; // 중복된 DateWorker가 없음
     }
 
-    private static List<DateWorker> sortDateWorkers(List<DateWorker> weekdaysWorkers, List<DateWorker> weekendsWorkers) {
+    private static List<DateWorker> sortDateWorkers(List<DateWorker> weekdaysWorkers,
+                                                    List<DateWorker> weekendsWorkers) {
         List<DateWorker> totalWorkers = new ArrayList<>(weekdaysWorkers);
         totalWorkers.addAll(weekendsWorkers);
         Collections.sort(totalWorkers);
@@ -82,7 +90,7 @@ public class EmergencyScheduler {
     }
 
     private static Worker getAnotherWorker(List<Worker> rawWeekdaysWorkers, int weekdayWorkersIndex) {
-       return rawWeekdaysWorkers.get(weekdayWorkersIndex);
+        return rawWeekdaysWorkers.get(weekdayWorkersIndex);
     }
 
     public List<DateWorker> getTotalWorkers() {
