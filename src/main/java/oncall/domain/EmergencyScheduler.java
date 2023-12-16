@@ -23,7 +23,15 @@ public class EmergencyScheduler {
         int weekendWorkersIndex = 0;
 
         List<WorkDate> workDates = emergencyMonth.getWorkDates();
+
+        boolean passNextAdd = false;
+
         for (int dayIndex = 0; dayIndex < workDates.size(); dayIndex++) {
+            if (passNextAdd) {
+                passNextAdd = false;
+                continue;
+            }
+
             WorkDate workDate = workDates.get(dayIndex);
             if (workDate.isWeekday()) {
                 Worker worker = rawWeekdaysWorkers.get(weekdayWorkersIndex);
@@ -35,7 +43,9 @@ public class EmergencyScheduler {
                 if (isContinousWorker(totalWorkers, workDate, worker)) {
                     Worker anotherWorker = getAnotherWorker(rawWeekdaysWorkers, weekdayWorkersIndex);
                     weekdaysWorkers.add(new DateWorker(workDate, anotherWorker));
-                    weekdaysWorkers.add(new DateWorker(workDate, worker));
+                    weekdaysWorkers.add(new DateWorker(workDates.get(dayIndex + 1), worker));
+
+                    passNextAdd = true;
                     weekdayWorkersIndex++;
                 }
 
@@ -49,7 +59,9 @@ public class EmergencyScheduler {
                 if (isContinousWorker(totalWorkers, workDate, worker)) {
                     Worker anotherWorker = getAnotherWorker(rawWeekendsWorkers, weekendWorkersIndex);
                     weekendsWorkers.add(new DateWorker(workDate, anotherWorker));
-                    weekendsWorkers.add(new DateWorker(workDate, worker));
+                    weekendsWorkers.add(new DateWorker(workDates.get(dayIndex + 1), worker));
+
+                    passNextAdd = true;
                     weekendWorkersIndex++;
                 }
 
