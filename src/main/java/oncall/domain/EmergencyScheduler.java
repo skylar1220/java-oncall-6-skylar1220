@@ -27,6 +27,9 @@ public class EmergencyScheduler {
             WorkDate workDate = workDates.get(dayIndex);
             if (workDate.isWeekday()) {
                 Worker worker = rawWeekdaysWorkers.get(weekdayWorkersIndex);
+                if (!isContinousWorker(totalWorkers, workDate, worker)) {
+                    weekdaysWorkers.add(new DateWorker(workDate, worker));
+                }
                 weekdayWorkersIndex++;
 
                 if (isContinousWorker(totalWorkers, workDate, worker)) {
@@ -39,6 +42,9 @@ public class EmergencyScheduler {
             }
             if (!workDate.isWeekday()) {
                 Worker worker = rawWeekendsWorkers.get(weekendWorkersIndex);
+                if (!isContinousWorker(totalWorkers, workDate, worker)) {
+                    weekdaysWorkers.add(new DateWorker(workDate, worker));
+                }
                 weekendWorkersIndex++;
                 if (isContinousWorker(totalWorkers, workDate, worker)) {
                     Worker anotherWorker = getAnotherWorker(rawWeekendsWorkers, weekendWorkersIndex);

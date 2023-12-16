@@ -19,23 +19,23 @@ public class EmergencyMonth {
         List<WorkDate> workDates = new ArrayList<>();
 
         for (int index = 0; index < monthDays.size(); index++) {
-            int offsetValue = index + startDay.getOffset() / 7;
+            int offsetValue = (index + startDay.getOffset()) % 7;
             DayOfTheWeek dayOfTheWeek = DayOfTheWeek.fromOffset(offsetValue);
 
-            if (isWeekdays(offsetValue)) {
-                WorkDate workDate = WorkDate.of(index + 1, dayOfTheWeek,  DayType.WEEKDAY);
+            if (isWeekdays(dayOfTheWeek)) {
+                WorkDate workDate = WorkDate.of(index + 1, dayOfTheWeek, DayType.WEEKDAY);
                 workDates.add(workDate);
             }
-            if (!isWeekdays(offsetValue)) { // 여기 수정 주말 오프셋
-                WorkDate workDate = WorkDate.of(index + 1,dayOfTheWeek,  DayType.WEEKEND);
+            if (!isWeekdays(dayOfTheWeek)) {
+                WorkDate workDate = WorkDate.of(index + 1, dayOfTheWeek, DayType.WEEKEND);
                 workDates.add(workDate);
             }
         }
         return new EmergencyMonth(month, workDates);
     }
 
-    private static boolean isWeekdays(int offsetValue) {
-        return offsetValue >= 0 && offsetValue <= 4;
+    private static boolean isWeekdays(DayOfTheWeek dayOfTheWeek) {
+        return dayOfTheWeek.isWeekDays();
     }
 
     public void applyLegalHolidays(LegalHolidays legalHolidays) {

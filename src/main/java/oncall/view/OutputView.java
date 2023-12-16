@@ -14,11 +14,6 @@ public class OutputView {
         this.printer = printer;
     }
 
-//    public void printTemplate(Template rawTemplate) {
-//        int template = OutputFomatter.toTemplate(rawTemplate);
-//        printer.printLine("%d개", template);
-//    }
-
     public void printEmergencySchedule(EmergencyMonth emergencyMonth, EmergencyScheduler emergencyScheduler) {
         List<DateWorker> totalWorkers = emergencyScheduler.getTotalWorkers();
         int month = emergencyMonth.getMonth().getName();

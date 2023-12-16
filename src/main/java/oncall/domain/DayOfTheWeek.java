@@ -8,8 +8,8 @@ public enum DayOfTheWeek {
     WEDNESDAY("수", 2),
     THURSDAY("목", 3),
     FRIDAY("금", 4),
-    SATURDAY("토", 0),
-    SUNDAY("일", 1);
+    SATURDAY("토", 5),
+    SUNDAY("일", 6);
 
     private final String koreanName;
     private final int offset;
@@ -21,7 +21,7 @@ public enum DayOfTheWeek {
 
     public static DayOfTheWeek from(String input) {
         return Arrays.stream(values())
-                .filter(dayOfTheWeek -> dayOfTheWeek.koreanName.equals(input))
+                .filter(day -> day.koreanName.equals(input))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 요일입니다."));
     }
@@ -39,5 +39,9 @@ public enum DayOfTheWeek {
 
     public int getOffset() {
         return offset;
+    }
+
+    public boolean isWeekDays() {
+        return !this.equals(SATURDAY) && !this.equals(SUNDAY);
     }
 }
