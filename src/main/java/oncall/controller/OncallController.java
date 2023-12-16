@@ -2,6 +2,7 @@ package oncall.controller;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
+import oncall.domain.EmergencyMonth;
 import oncall.domain.LegalHolidays;
 import oncall.view.InputView;
 import oncall.view.OutputView;
@@ -17,6 +18,8 @@ public class OncallController {
 
     public void run() {
         LegalHolidays legalHolidays = LegalHolidays.init();
+        EmergencyMonth emergencyMonth = inputView.inputEmergencyMonth();
+        emergencyMonth.applyLegalHolidays(legalHolidays);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

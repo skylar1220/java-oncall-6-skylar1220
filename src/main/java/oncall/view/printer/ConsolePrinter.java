@@ -2,6 +2,11 @@ package oncall.view.printer;
 
 public class ConsolePrinter implements Printer {
     @Override
+    public void printInOneLine(String message) {
+        System.out.print(message);
+    }
+
+    @Override
     public void printLine(String message) {
         System.out.println(message);
     }

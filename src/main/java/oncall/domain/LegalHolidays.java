@@ -22,4 +22,9 @@ public class LegalHolidays {
         legalHolidays.add(LegalHoliday.of(12, 25));
         return new LegalHolidays(legalHolidays);
     }
+
+    public boolean contains(Month month, WorkDate workDate) {
+        return legalHolidays.stream()
+                .anyMatch(legalHoliday -> legalHoliday.isSameWith(month, workDate));
+    }
 }

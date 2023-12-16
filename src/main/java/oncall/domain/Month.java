@@ -56,4 +56,8 @@ public enum Month {
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 달입니다."));
     }
+
+    public List<Integer> getDays() {
+        return days;
+    }
 }

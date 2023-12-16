@@ -54,7 +54,7 @@ public class GeneralValidator {
     public static void validateSplitCount(String seperator, String value, int requiredCount, String target) {
         List<String> values = Converter.splitToList(seperator, value);
         if (!hasValidCount(values, requiredCount)) {
-            throw new IllegalArgumentException(String.format("%s은(는) 올바르게 하나씩 입력해주세요", target));
+            throw new IllegalArgumentException(String.format("%s은(는) 입력 형식이 올바르지 않습니다.", target));
         }
     }
 

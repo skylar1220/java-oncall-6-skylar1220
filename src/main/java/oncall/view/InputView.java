@@ -1,11 +1,14 @@
 package oncall.view;
 
+import oncall.common.Symbol;
+import oncall.domain.EmergencyMonth;
+import oncall.util.converter.Converter;
 import oncall.view.printer.Printer;
 import oncall.view.reader.Reader;
 import oncall.view.validator.InputValidator;
 
 public class InputView {
-//    public static final String SEPARATOR = Symbol.COMMA;
+    public static final String EMERGENCY_MONTH_SEPARATOR = Symbol.COMMA;
     private final Reader reader;
     private final Printer printer;
     private final InputValidator validator;
@@ -18,6 +21,14 @@ public class InputView {
 
     public static InputView of(Reader reader, Printer printer) {
         return new InputView(reader, printer, InputValidator.getInstance());
+    }
+
+    public EmergencyMonth inputEmergencyMonth() {
+        printer.printInOneLine("비상 근무를 배정할 월과 시작 요일을 입력하세요>");
+        String emergencyMonth = reader.readLine();
+        validator.validateEmergencyMonth(emergencyMonth, "배정할 월과 시작 요일");
+        return EmergencyMonth.of(Converter.convertToInt(Converter.splitValue(EMERGENCY_MONTH_SEPARATOR, 0, emergencyMonth)),
+                Converter.splitValue(EMERGENCY_MONTH_SEPARATOR, 1, emergencyMonth));
     }
 
 //    public Template inputTemplate() {
