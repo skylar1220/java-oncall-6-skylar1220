@@ -2,6 +2,7 @@ package oncall.controller;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
+import oncall.domain.LegalHolidays;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -15,6 +16,7 @@ public class OncallController {
     }
 
     public void run() {
+        LegalHolidays legalHolidays = LegalHolidays.init();
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {
