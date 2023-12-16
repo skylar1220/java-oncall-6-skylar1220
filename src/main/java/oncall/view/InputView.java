@@ -47,11 +47,4 @@ public class InputView {
         validator.validateWeekdaysWorkers(weekendsWorkers, "휴일 비상 근무 사원");
         return Workers.from(Converter.splitToTrimedList(WORKERS_SEPARATOR, weekendsWorkers));
     }
-
-//    public Template inputTemplate() {
-//        printer.printLine("");
-//        String template = reader.readLine();
-//        validator.validate(template, "템플릿");
-//        return new Template();
-//    }
 }

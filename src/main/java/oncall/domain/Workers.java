@@ -40,4 +40,8 @@ public class Workers {
     private static boolean isValidCount(List<String> workers) {
         return workers.size() >= 5 && workers.size() <= 35;
     }
+
+    public List<Worker> getWorkers() {
+        return workers;
+    }
 }

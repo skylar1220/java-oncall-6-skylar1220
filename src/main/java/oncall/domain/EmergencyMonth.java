@@ -42,4 +42,12 @@ public class EmergencyMonth {
                 .filter(workDate -> legalHolidays.contains(month, workDate))
                 .forEach(WorkDate::applyHoliday);
     }
+
+    public List<WorkDate> getWorkDates() {
+        return workDates;
+    }
+
+    public Month getMonth() {
+        return month;
+    }
 }

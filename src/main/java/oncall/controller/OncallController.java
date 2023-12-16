@@ -4,6 +4,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import oncall.domain.AllWorkers;
 import oncall.domain.EmergencyMonth;
+import oncall.domain.EmergencyScheduler;
 import oncall.domain.LegalHolidays;
 import oncall.domain.Workers;
 import oncall.view.InputView;
@@ -24,6 +25,8 @@ public class OncallController {
         emergencyMonth.applyLegalHolidays(legalHolidays);
 
         AllWorkers allWorkers = readWithRetry(this::getWorkers);
+
+        EmergencyScheduler emergencyScheduler = EmergencyScheduler.of(emergencyMonth, allWorkers);
     }
 
     private AllWorkers getWorkers() {
