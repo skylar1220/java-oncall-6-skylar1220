@@ -2,8 +2,10 @@ package oncall.controller;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
+import oncall.domain.AllWorkers;
 import oncall.domain.EmergencyMonth;
 import oncall.domain.LegalHolidays;
+import oncall.domain.Workers;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -18,8 +20,16 @@ public class OncallController {
 
     public void run() {
         LegalHolidays legalHolidays = LegalHolidays.init();
-        EmergencyMonth emergencyMonth = inputView.inputEmergencyMonth();
+        EmergencyMonth emergencyMonth = readWithRetry(inputView::inputEmergencyMonth);
         emergencyMonth.applyLegalHolidays(legalHolidays);
+
+        AllWorkers allWorkers = readWithRetry(this::getWorkers);
+    }
+
+    private AllWorkers getWorkers() {
+        Workers weekdaysWorkers = inputView.inputWeekdaysWorkers();
+        Workers weekendsWorkers = inputView.inputWeekendsWorkers();
+        return AllWorkers.of(weekdaysWorkers, weekendsWorkers);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

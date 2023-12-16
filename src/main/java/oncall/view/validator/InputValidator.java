@@ -8,6 +8,7 @@ import oncall.util.validator.StringValidator;
 public class InputValidator {
     private static InputValidator inputValidator;
     public static final String EMERGENCY_MONTH_SEPARATOR = Symbol.COMMA;
+    private static final String WORKERS_SEPARATOR = Symbol.COMMA;
 
     private InputValidator() {
     }
@@ -36,6 +37,13 @@ public class InputValidator {
         GeneralValidator.validateNotStartsWith(separator, emergencyMonth, target);
         GeneralValidator.validateNotEndsWith(separator, emergencyMonth, target);
         GeneralValidator.validateSplitCount(separator, emergencyMonth, 2, target);
+    }
+
+    public void validateWeekdaysWorkers(String weekdaysWorkers, String target) {
+        StringValidator.validateBlank(weekdaysWorkers, target);
+        GeneralValidator.validateSingleSeparator(WORKERS_SEPARATOR, weekdaysWorkers, target);
+        GeneralValidator.validateNotStartsWith(WORKERS_SEPARATOR, weekdaysWorkers, target);
+        GeneralValidator.validateNotEndsWith(WORKERS_SEPARATOR, weekdaysWorkers, target);
     }
 
 //    public static void validateNumber(String template, String target) {
