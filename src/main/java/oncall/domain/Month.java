@@ -60,4 +60,8 @@ public enum Month {
     public List<Integer> getDays() {
         return days;
     }
+
+    public int getName() {
+        return name;
+    }
 }

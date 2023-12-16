@@ -78,4 +78,8 @@ public class EmergencyScheduler {
     private static Worker getAnotherWorker(List<Worker> rawWeekdaysWorkers, int weekdayWorkersIndex) {
        return rawWeekdaysWorkers.get(weekdayWorkersIndex);
     }
+
+    public List<DateWorker> getTotalWorkers() {
+        return totalWorkers;
+    }
 }

@@ -4,17 +4,19 @@ import java.util.Objects;
 
 public class WorkDate implements Comparable<WorkDate>{
     private final int date;
+    private final DayOfTheWeek dayOfTheWeek;
     private DayType dayType;
     private boolean isLegalHoliday;
 
-    public WorkDate(int date, DayType dayType, boolean isLegalHoliday) {
+    public WorkDate(int date, DayOfTheWeek dayOfTheWeek, DayType dayType, boolean isLegalHoliday) {
         this.date = date;
+        this.dayOfTheWeek = dayOfTheWeek;
         this.dayType = dayType;
         this.isLegalHoliday = isLegalHoliday;
     }
 
-    public static WorkDate of(int date, DayType dayType) {
-        return new WorkDate(date, dayType, false);
+    public static WorkDate of(int date, DayOfTheWeek dayOfTheWeek, DayType dayType) {
+        return new WorkDate(date, dayOfTheWeek, dayType, false);
     }
 
     public boolean isSameDate(int day) {
@@ -32,6 +34,14 @@ public class WorkDate implements Comparable<WorkDate>{
 
     public int getDate() {
         return date;
+    }
+
+    public DayOfTheWeek getDayOfTheWeek() {
+        return dayOfTheWeek;
+    }
+
+    public boolean isLegalHoliday() {
+        return isLegalHoliday;
     }
 
     @Override

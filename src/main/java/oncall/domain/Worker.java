@@ -20,6 +20,10 @@ public class Worker {
         return workerName.length() <= 5;
     }
 
+    public String getWorkerName() {
+        return workerName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

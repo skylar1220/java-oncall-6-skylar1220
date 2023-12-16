@@ -20,13 +20,14 @@ public class EmergencyMonth {
 
         for (int index = 0; index < monthDays.size(); index++) {
             int offsetValue = index + startDay.getOffset() / 7;
+            DayOfTheWeek dayOfTheWeek = DayOfTheWeek.fromOffset(offsetValue);
 
             if (isWeekdays(offsetValue)) {
-                WorkDate workDate = WorkDate.of(index + 1, DayType.WEEKDAY);
+                WorkDate workDate = WorkDate.of(index + 1, dayOfTheWeek,  DayType.WEEKDAY);
                 workDates.add(workDate);
             }
-            if (!isWeekdays(offsetValue)) {
-                WorkDate workDate = WorkDate.of(index + 1, DayType.WEEKEND);
+            if (!isWeekdays(offsetValue)) { // 여기 수정 주말 오프셋
+                WorkDate workDate = WorkDate.of(index + 1,dayOfTheWeek,  DayType.WEEKEND);
                 workDates.add(workDate);
             }
         }

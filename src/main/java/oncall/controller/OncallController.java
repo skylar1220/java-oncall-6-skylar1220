@@ -27,6 +27,7 @@ public class OncallController {
         AllWorkers allWorkers = readWithRetry(this::getWorkers);
 
         EmergencyScheduler emergencyScheduler = EmergencyScheduler.of(emergencyMonth, allWorkers);
+        outputView.printEmergencySchedule(emergencyMonth, emergencyScheduler);
     }
 
     private AllWorkers getWorkers() {

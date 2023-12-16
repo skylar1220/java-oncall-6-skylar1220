@@ -44,6 +44,7 @@ public class InputView {
     public Workers inputWeekendsWorkers() {
         printer.printInOneLine("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         String weekendsWorkers = reader.readLine();
+        printer.printEmptyLine();
         validator.validateWeekdaysWorkers(weekendsWorkers, "휴일 비상 근무 사원");
         return Workers.from(Converter.splitToTrimedList(WORKERS_SEPARATOR, weekendsWorkers));
     }

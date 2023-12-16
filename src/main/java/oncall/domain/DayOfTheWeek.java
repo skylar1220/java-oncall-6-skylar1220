@@ -26,6 +26,13 @@ public enum DayOfTheWeek {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 요일입니다."));
     }
 
+    public static DayOfTheWeek fromOffset(int input) {
+        return Arrays.stream(values())
+                .filter(dayOfTheWeek -> dayOfTheWeek.offset == input)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 요일입니다."));
+    }
+
     public String getKoreanName() {
         return koreanName;
     }
